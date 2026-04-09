@@ -4,6 +4,7 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import userRoutes from './routes/authRoutes.js'
 import cookieParser from 'cookie-parser'
+import postRoutes from './routes/postRoutes.js'
 
 dotenv.config()
 
@@ -25,7 +26,9 @@ app.get("/test",(req,res)=>{
 })
 
 app.use('/auth',userRoutes)
-
+app.use('/post', postRoutes)
+app.use('/uploads', express.static('uploads'))
+ 
 app.listen(PORT,()=>{
     console.log("My new server running on "+PORT)
 })

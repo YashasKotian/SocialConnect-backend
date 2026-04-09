@@ -16,7 +16,26 @@ const userSchema = new mongoose.Schema({
     password:{
         type: String,
         required: true
-    }
+    },
+    profilePicture: {
+       type: String 
+    },
+    bio: {
+        type: String
+    },
+    followers: [{
+        follower:{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'user'
+        }
+    }],
+    following: [{
+        followed : {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'user'
+        }
+    }],
+
 },
 {timestamps: true}
 )
