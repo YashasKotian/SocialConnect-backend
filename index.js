@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express from 'express'
 import mongoConnection from './db.js'
 import cors from 'cors'
