@@ -25,7 +25,7 @@ export const registeruser = async (req, res) => {
       password: hashedPassword
     })
 
-    await sendEmail(email, 'welcome to SocialConnect',
+    sendEmail(email, 'welcome to SocialConnect',
       `<div style="margin:0;padding:0;background-color:#f4f6f8;font-family:Arial,Helvetica,sans-serif;">
     <table align="center" width="100%" cellpadding="0" cellspacing="0"
       style="max-width:600px;margin:auto;background:#ffffff;border-radius:10px;
@@ -75,7 +75,7 @@ export const registeruser = async (req, res) => {
 
     </table>
   </div>`
-    )
+    ).catch(err => console.error("Email send error:", err))
 
     res.status(201).json({
       success: true,
@@ -84,10 +84,11 @@ export const registeruser = async (req, res) => {
     })
 
   } catch (error) {
-    console.log(error)
+    console.error("Registration error:", error.message);
     res.status(500).json({
       success: false,
-      message: "internal server error!"
+      message: "internal server error!",
+      error: error.message
     })
   }
 }
@@ -135,10 +136,11 @@ export const loginUser = async (req, res) => {
     })
 
   } catch (error) {
-    console.log(error);
+    console.error("Login error:", error.message);
     res.status(500).json({
       success: false,
-      message: "failed to add User!"
+      message: "failed to add User!",
+      error: error.message
     })
   }
 }
